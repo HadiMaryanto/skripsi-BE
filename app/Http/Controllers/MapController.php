@@ -15,13 +15,13 @@ class MapController extends Controller
      */
     public function index()
     {
-        $map = DB::table('data_kebakaran')               
-               ->get();
-        
+        $map = DB::table('data_kebakaran')
+            ->get();
+
         $tanggal = [];
         $waktu = [];
         $satelit = [];
-        $latitude = [];  
+        $latitude = [];
         $longitude = [];
         $provinsi = [];
         $kabupaten = [];
@@ -30,7 +30,7 @@ class MapController extends Controller
         $kawasan = [];
 
         $dataResponse = [];
-        foreach($map as $value){
+        foreach ($map as $value) {
             // $provinsi[] = $value->kebakaran_provinsi;
             // $tanggal[] = $value->kebakaran_tanggal;
             // $waktu[] = $value->kebakaran_waktu;
@@ -42,7 +42,7 @@ class MapController extends Controller
             // $desa[] = $value->kebakaran_desa;
             // $kawasan[] = $value->kebakaran_kawasan;
 
-            array_push($dataResponse,array(
+            array_push($dataResponse, array(
                 'data' => array(
                     'provinsi' => $value->kebakaran_provinsi,
                     'tanggal' => $value->kebakaran_tanggal,
@@ -56,7 +56,7 @@ class MapController extends Controller
                     'kawasan' => $value->kebakaran_kawasan
                 )
             ));
-        }   
+        }
         // dd($tanggal,$provinsi,$waktu,$satelit,$latitude,$longitude,$kabupaten,$kecamatan,$desa,$kawasan);
 
         // array_push($dataResponse,array(
@@ -73,23 +73,23 @@ class MapController extends Controller
         //         'kawasan' => $kawasan
         //     )
         //     ));
-            // return json_encode([
-            //     $dataResponse
-            // ]);
+        // return json_encode([
+        //     $dataResponse
+        // ]);
 
-            $newDataResponse = "name,mass,year,reclat,reclong";
-            foreach ($dataResponse as $dataRes) {                
-                $name =  $dataRes['data']['provinsi'];                
-                $mass =  5;
-                $year =  substr($dataRes['data']['tanggal'], 0,4);                
-                $reclat = (float)$dataRes['data']['latitude'];                                
-                $reclong = (float)$dataRes['data']['longitude'];
-                $newDataResponse .= "<br/>$name,$mass,$year,$reclat,$reclong";
-            }
-            // return $newDataResponse;
-            // return json_encode([
-            //     $dataResponse
-            // ]);
+        $newDataResponse = "name,mass,year,reclat,reclong";
+        foreach ($dataResponse as $dataRes) {
+            $name =  $dataRes['data']['provinsi'];
+            $mass =  5;
+            $year =  substr($dataRes['data']['tanggal'], 0, 4);
+            $reclat = (float)$dataRes['data']['latitude'];
+            $reclong = (float)$dataRes['data']['longitude'];
+            $newDataResponse .= "<br/>$name,$mass,$year,$reclat,$reclong";
+        }
+        // return $newDataResponse;
+        // return json_encode([
+        //     $dataResponse
+        // ]);
 
         // return json_encode(array(
         //     'status' => 200,
@@ -177,12 +177,12 @@ class MapController extends Controller
     }
     public function jsonGroupDateTime(Request $request)
     {
-        $map = DB::table('data_kebakaran')               
-               ->get();
-                
+        $map = DB::table('data_kebakaran')
+            ->get();
+
         $dataResponse = [];
-        foreach($map as $value){            
-            array_push($dataResponse,array(
+        foreach ($map as $value) {
+            array_push($dataResponse, array(
                 'data' => array(
                     'provinsi' => $value->kebakaran_provinsi,
                     'tanggal' => $value->kebakaran_tanggal,
@@ -196,21 +196,25 @@ class MapController extends Controller
                     'kawasan' => $value->kebakaran_kawasan
                 )
             ));
-        }   
-            $newDataResponse = "name,mass,year,reclat,reclong";
-            foreach ($dataResponse as $dataRes) {                
-                $name =  $dataRes['data']['provinsi'];                
-                $mass =  (float)2100000;
-                $year =  substr($dataRes['data']['tanggal'], 0,4);                
-                $reclat = (float)$dataRes['data']['latitude'];                   
-                $reclong = (float)$dataRes['data']['longitude'];
-                $newDataResponse .= "<br/>$name,$mass,$year,$reclat,$reclong";
-            }
-            return $newDataResponse;              
-                  
+        }
 
-        // return view('map.index');
-        
+        return response()->streamDownload(function () use ($dataResponse) {
+            $csv = fopen("php://output", "w+");
+
+            fputcsv($csv, ["name", "mass", "year", "reclat", "reclong"]);
+
+            foreach ($dataResponse as $dataRes) {
+                fputcsv($csv, [
+                    $dataRes['data']['provinsi'],
+                    210000,
+                    (int)rand(1900, 2021),
+                    (float)$dataRes['data']['latitude'],
+                    (float)$dataRes['data']['longitude'],
+                ]);
+            }
+
+            fclose($csv);
+        }, "response.csv", ["Content-type" => "text/csv"]);
     }
 
     // public function jsonGroupDateTime(Request $request)
@@ -236,7 +240,7 @@ class MapController extends Controller
     //                 'waktu' => $dataTimeByDate
     //             )
     //         ));
-            
+
     //     }
 
     //         $newDataResponse = "name,mass,year,reclat,reclong";
