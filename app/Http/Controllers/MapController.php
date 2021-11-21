@@ -177,7 +177,10 @@ class MapController extends Controller
     }
     public function jsonGroupDateTime(Request $request)
     {
+        $filterYear = $request->query('year');
+
         $map = DB::table('data_kebakaran')
+            ->where('kebakaran_tanggal', 'like', '%' . $filterYear . '%')
             ->get();
 
         $dataResponse = [];
@@ -208,6 +211,7 @@ class MapController extends Controller
                     $dataRes['data']['provinsi'],
                     210000,
                     (int)rand(1900, 2021),
+                    // substr($dataRes['data']['tanggal'], 0,4),
                     (float)$dataRes['data']['latitude'],
                     (float)$dataRes['data']['longitude'],
                 ]);
