@@ -82,8 +82,10 @@ class DashboardController extends Controller
         return view('dashboard.index', $data);
     }
     public function getLineChart(Request $request){
+        $tahunselect = $_GET['tahun'];
        if (isset($_GET['tahun'])){
-            $tahunSelected = $_GET['tahun'];
+            // $tahunSelected = $_GET['tahun'];
+            $tahunSelected = $tahunselect;
 
             $januaryData = DB::table('data_kebakaran')                    
             ->where('kebakaran_tanggal','like','%'.$tahunSelected.'01%')   
@@ -157,8 +159,9 @@ class DashboardController extends Controller
             'status' => 200,
             'message' => 'showing all data',
             'data' => []
-       )); 
+       ));         
     }
+
     public function getBarChart(){
         if (isset($_GET['tahun'])){
             $tahunSelected = $_GET['tahun'];

@@ -6,8 +6,18 @@
 <div class="main-content">
         <section class="section">
           <div class="section-body">
-            <div class="row">
+            <div class="row">                          
               <div class="col-12">
+              @if(session('berhasil'))
+              <div class="alert alert-primary alert-dismissible show fade">
+                <div class="alert-body">
+                  <button class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                  </button>
+                        <b>Yeaah</b> {{session('berhasil')}}
+                </div>
+              </div>
+              @endif
                 <div class="card">
                   <div class="card-header">
                     <h4>Import Data</h4>

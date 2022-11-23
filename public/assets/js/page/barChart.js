@@ -6,7 +6,7 @@ $(document).ready(function(){
 
     showChart(initData, '');
 
-    $('#barTahun').change(function(e){  
+    $('#tahun').change(function(e){  
         // console.log(window.location.origin+"/api/lineChart?tahun="+$(this).val())
         let year = $(this).val();
           $.get( window.location.origin+"/api/barChart?tahun="+$(this).val(), function( response ) {
@@ -17,11 +17,11 @@ $(document).ready(function(){
     });
 
     function showChart(response, year){
-        let label = 'GRAFIK HOTSPOT DI INDONESIA PERPROVINSI';
-        if(year !== '' ){
-            let label = 'GRAFIK HOTSPOT DI INDONESIA PERPROVINSI TAHUN '+year;
-        }
-        
+        let label = 'BAR CHART HOTSPOT DI INDONESIA PERPROVINSI '+year;
+        // if(year !== '' ){
+        //     let label = 'GRAFIK HOTSPOT DI INDONESIA PERPROVINSI TAHUN '+year;
+        // }
+        console.log(response.provinsi);
 
         Highcharts.chart('barchart', {
             chart: {
@@ -32,15 +32,15 @@ $(document).ready(function(){
             },
             subtitle: {
                 text: 'Source: http://sipongi.menlhk.go.id/hotspot/sebaran_arsip#'
-            },
+            },            
             xAxis: {
                 categories: response.provinsi,
-                title: {
-                    text: null
-                }
+                // title: {
+                //     text: null
+                // }
             },
             yAxis: {
-                min: 0,
+                min: 13,
                 title: {
                     text: 'Total Hotspot',
                     align: 'high'

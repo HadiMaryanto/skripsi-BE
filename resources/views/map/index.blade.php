@@ -15,51 +15,29 @@
               <h4>Peta Indonesian</h4>
             </div>
             <div class="card-body">
-              <div class="row">
+              <div class="row">                                                
                 <div class="col mb-1 ml-1 mr-1 ">
                   <div class="form-group">
-                    <label>Provinsi</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col mb-1 ml-1 mr-1 ">
-                  <div class="form-group">
-                    <label>Kabupaten</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col mb-1 ml-1 mr-1 ">
-                  <div class="form-group">
-                    <label>Kecamatan</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col mb-1 ml-1 mr-1 ">
-                  <div class="form-group">
-                    <label>Tgl Awal - Tgl Akhir</label>
-                    <select id="selecteDate" name="cars">
+                    <label>Tahun</label>
+                    <select id="selecteDate" name="cars" class="form-control">
+                      <option>pilih tahun</option>
                       <option value="2016">2016</option>
                       <option value="2017">2017</option>
                       <option value="2018">2018</option>
                       <option value="2019">2019</option>
+                      
                     </select>
                   </div>
-                </div>
-                <div class="col mb-1 ml-1 mr-1 ">
-                  <div class="form-group">
-                    <button class="btn btn-primary">Mulai</button>
-                  </div>
-                </div>
+                </div>                
               </div>
             </div>
-            <!-- <div class="card-body">
-                    <div id="map" class="map" ></div>
-                  </div> -->
+            <div class="card-body">
+              <iframe id="map" src="http://localhost:3000/" title="description"></iframe>                
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <iframe id="map" src="http://localhost:3000/" title="description"></iframe>
+    </div>    
   </section>
 </div>
 

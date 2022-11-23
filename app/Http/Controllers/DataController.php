@@ -6,6 +6,7 @@ use App\Models\DataKebakaran;
 use App\Imports\DataImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 
 class DataController extends Controller
@@ -17,7 +18,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        $dataKebakaran = DataKebakaran::all();
+        $dataKebakaran = DataKebakaran::paginate(200);
         // $data = DB::table('data_provinsi')->get();
 
         // dd($data1);
@@ -44,6 +45,7 @@ class DataController extends Controller
     {
         $tes = Excel::import(new DataImport, $request->file('import'));
         // dd($tes);
+        Session::flash('berhasil', 'Data Berhasil di Import');
         return redirect('data');
         
     }

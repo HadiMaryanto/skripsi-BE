@@ -51,7 +51,7 @@
                   </div>
                 </form>
                 <div class="text-center mt-4 mb-3">
-                  <div class="text-job text-muted">Kembali Ke</div>
+                  <div class="text-job text-muted">Langsung Kehalaman</div>
                 </div>
                 <div class="row sm-gutters">
                   <div class="col-6">

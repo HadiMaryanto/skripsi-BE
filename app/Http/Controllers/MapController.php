@@ -209,7 +209,7 @@ class MapController extends Controller
             foreach ($dataResponse as $dataRes) {
                 fputcsv($csv, [
                     $dataRes['data']['provinsi'],
-                    210000,
+                    5,
                     (int)rand(1900, 2021),
                     // substr($dataRes['data']['tanggal'], 0,4),
                     (float)$dataRes['data']['latitude'],

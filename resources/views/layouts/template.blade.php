@@ -32,6 +32,10 @@
       width: 100%;
       height: 400px;      
     }
+    #barchart {
+      min-height: 550px;
+      /* display:flex; */
+    }
   </style>
 </head>
 

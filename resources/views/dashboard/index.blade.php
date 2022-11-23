@@ -84,22 +84,22 @@
               <div class="col-12">
                 <div class="card">                  
                   <div class="card-body">
-				  <div class="form-group">
-                      <label>Tahun</label>
-                      <select class="form-control" name="tahun" id="barTahun">
+				  <div class="panel">
+				  <!-- <div class="form-group"> -->
+                      <!-- <label>Tahun</label> -->
+                      <!-- <select class="form-control" name="tahun" id="barTahun">
 						  <option>pilih tahun</option>
 						  @foreach($tahun as $value)
                         <option value={{$value}}>{{$value}}</option>  
 						  @endforeach                      
-                      </select>
-                    </div>
-                    <div class="panel">
+                      </select> -->
+                    <!-- </div>                 -->
 						<div id="barchart"></div>
 					</div>
                   </div>                  
                 </div>
               </div>
             </div>
-				</section>				
+				<!-- </section>				 -->
 			</div>
 @endsection
